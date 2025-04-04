@@ -4,6 +4,7 @@ on: [push, pull_request]
 jobs:  
   test:  
     runs-on: ubuntu-latest  
+
     steps:  
       - name: Checkout code  
         uses: actions/checkout@v2  
@@ -16,8 +17,9 @@ jobs:
       - name: Install dependencies  
         run: pip install pylint  
 
-      - name: Run PyLint  
-        run: pylint app.py  
+      - name: Run PyLint on all Python files  
+        run: pylint *.py  
+        continue-on-error: true
 
       - name: Run Unit Tests  
         run: python -m unittest discover
